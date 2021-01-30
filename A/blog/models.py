@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User 
+from django.urls import reverse
 
 
 class Articles(models.Model):
@@ -20,4 +21,6 @@ class Articles(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('blog:article_detail', args=[self.id , self.slug])
 
