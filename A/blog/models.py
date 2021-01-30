@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User 
 
 
-class Article(models.Model):
+class Articles(models.Model):
     STATUS = (
         ('draft','Draft'),
         ('publish','Publish')
