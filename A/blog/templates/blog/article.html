@@ -5,8 +5,8 @@
 {% block content %}
     <div class="card">
         <h3>{{ article.title }}</h3>
-        <small>{{ article.publish }}</small>
-        <p>{{ article.body }}</p>
+        <small>{{ article.publish|timesince }}</small>
+        <p>{{ article.body|safe }}</p>
         
     </div>
 {% endblock %}

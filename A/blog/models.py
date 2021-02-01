@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User 
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 
 class Articles(models.Model):
@@ -12,7 +13,8 @@ class Articles(models.Model):
     title = models.CharField(max_length = 120) 
     slug = models.SlugField(max_length = 120, unique = True)
     writer = models.ForeignKey(User, on_delete = models.CASCADE)
-    body = models.TextField()
+    body = RichTextField(blank=True, null=True)
+    #body = models.TextField()
     publish = models.DateTimeField(default = datetime.now)
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
