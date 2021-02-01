@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 def user_login(request):
     if request.method == 'POST':
@@ -22,3 +23,17 @@ def user_login(request):
     
     context = {'form': form}
     return render(request, 'accounts/login.html', context)
+
+
+def user_register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data  #copy all cleaned data
+            User.objects.create_user(cd['username'],cd['email'],cd['password'])
+            messages.success(request,'you registered successfuly, now log in', 'success')
+            return redirect('accounts:user_login')
+    else:
+        form = UserRegistrationForm()
+        context = {'form':form}
+        return render(request, 'accounts/register.html', context)
