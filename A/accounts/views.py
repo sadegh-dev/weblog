@@ -35,8 +35,9 @@ def user_register(request):
             return redirect('accounts:user_login')
     else:
         form = UserRegistrationForm()
-        context = {'form':form}
-        return render(request, 'accounts/register.html', context)
+    context = {'form':form}
+    return render(request, 'accounts/register.html', context)
+
 
 
 def user_logout(request):
